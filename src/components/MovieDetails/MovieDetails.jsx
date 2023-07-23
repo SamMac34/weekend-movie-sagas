@@ -7,21 +7,25 @@ function MovieDetails() {
     // let movie = location.state.movie
     // console.log('in MovieDetails:', movie.id)
 
-    const movie = useSelector(store => store.movies)
-    console.log('in MovieDetails:', movie)
+    const movieArr = useSelector(store => store.movies)
+    console.log('in MovieDetails:', movieArr)
 
     // TODO: GET request for genres
 
 
     return (
         <div>
-            {/* <h1>Movie Details</h1>
-            <h2>{movie.title}</h2>
-            <p>Genres here</p>
-            <img src={movie.poster} alt={movie.title} />
-            <p>{movie.description}</p> */}
-            <h3>{movie}</h3>
-
+            <h1>Movie Details</h1>
+            {movieArr.map(movie => {
+                return (
+                    <>
+                    <h2>{movie.title}</h2>
+                    <img src={movie.poster} alt={movie.title} />
+                    <p>{movie.description}</p>
+                    <p>Genres here</p>
+                    </>
+                )
+        })}
         </div>
     )
 }

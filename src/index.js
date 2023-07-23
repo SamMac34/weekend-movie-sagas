@@ -14,7 +14,7 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeLatest('SELECT_MOVIE', selectMovie)
+    yield takeLatest('SELECT_MOVIE', fetchMovieDetails)
 }
 
 function* fetchAllMovies() {
@@ -29,15 +29,17 @@ function* fetchAllMovies() {
     }
 }
 
-function* selectMovie() {
-    // Get selected movie data from DB
+
+function* fetchMovieDetails(action) {
+    console.log('fetchMovieDetails, movie ID is:', action.payload);
+
+    // Get selected movie details and genres from DBs
     try {
-        const movie = yield axios.get(`/api/movie/${movie.id}`);
-        console.log('selectMovie saga, movie is:', movie.data);
+        const movie = yield axios.get(`/api/movie/${action.payload}`);
         yield put({ type: 'SET_MOVIES', payload: movie.data})
 
     } catch (err) {
-        console.log('Error in index>selectMovie:', err)
+        console.log('Error in fetchMovieDetails:', err)
     }
 }
 

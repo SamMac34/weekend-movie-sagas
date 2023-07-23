@@ -11,6 +11,7 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
@@ -33,11 +34,11 @@ function* fetchAllMovies() {
 function* fetchMovieDetails(action) {
     console.log('fetchMovieDetails, movie ID is:', action.payload);
 
-    // Get selected movie details and genres from DBs
+    // Fetch selected movie details and genres from DBs
     try {
-        const movie = yield axios.get(`/api/movie/${action.payload}`);
-        yield put({ type: 'SET_MOVIES', payload: movie.data})
 
+        let movie = yield axios.get(`/api/movie/${action.payload}`);
+        yield put({ type: 'SET_MOVIES', payload: movie.data});
     } catch (err) {
         console.log('Error in fetchMovieDetails:', err)
     }

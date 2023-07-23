@@ -1,42 +1,31 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+// import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function MovieDetails() {
-    const location = useLocation();
+    // const location = useLocation();
     // let movie = location.state.movie
     // console.log('in MovieDetails:', movie.id)
-
+    const history = useHistory();
     const movieArr = useSelector(store => store.movies)
     console.log('in MovieDetails:', movieArr)
-
-    // TODO: GET request for genres
 
 
     return (
         <div>
             <h1>Movie Details</h1>
+            <h2>{movieArr[0].title}</h2>
+            <img src={movieArr[0].poster} alt={movieArr[0].title} />
+            <p>{movieArr[0].description}</p>
             {movieArr.map(movie => {
                 return (
-                    <>
-                    <h2>{movie.title}</h2>
-                    <img src={movie.poster} alt={movie.title} />
-                    <p>{movie.description}</p>
-                    <p>Genres here</p>
-                    </>
+                    <span key={movie.id}>⚫️ {movie.name}</span>
                 )
-        })}
+            })}
+            <button type="button" onClick={() => {history.push('/')}}>⬅ Back to List</button>
         </div>
     )
 }
 
 export default MovieDetails;
-
-{/* <div key={movie.id} >
-<h3>{movie.title}</h3>
-<img
-    src={movie.poster}
-    alt={movie.title}
-    // onClick={() => { history.push(`/details/${movie.id}`) }}
-    onClick={() => {handleMovieClick(movie)}}
-/> */}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-// Render movie list
+// Show list of all movies in DB
 function MovieList() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -16,12 +16,12 @@ function MovieList() {
 
     // Handle click event, send user to MovieDetails page
     const handleMovieClick = (movie) => {
-        dispatch({ type: 'FETCH_MOVIEDETAILS', payload: movie.id });
-        // console.log('in handleMovieClick, movie is:', movie);
+        console.log('in handleMovieClick, movie.id is:', movie.id);
+        dispatch({ type: 'FETCH_MOVIEDETAILS', payload: movie.id })
         history.push(`/details/${movie.title}`);
     }
 
-
+    // Render movie list
     return (
         <main>
             <h1>MovieList</h1>

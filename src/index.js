@@ -30,15 +30,14 @@ function* fetchAllMovies() {
     }
 }
 
-
-function* fetchMovieDetails(action) {
-    console.log('fetchMovieDetails, movie ID is:', action.payload);
-
     // Fetch selected movie details and genres from DBs
-    try {
+function* fetchMovieDetails(action) {
 
-        let movie = yield axios.get(`/api/movie/${action.payload}`);
-        yield put({ type: 'SET_MOVIES', payload: movie.data});
+    try {
+        const movie = yield axios.get(`/api/movie/${action.payload}`);
+        yield put({ type: 'SET_MOVIEDETAILS', payload: movie.data });
+        yield console.log('fetchMovieDetails, movie ID is:', action.payload);
+
     } catch (err) {
         console.log('Error in fetchMovieDetails:', err)
     }
@@ -51,6 +50,16 @@ const sagaMiddleware = createSagaMiddleware();
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+// Store for movie details
+const movieDetails = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_MOVIEDETAILS':
             return action.payload;
         default:
             return state;
@@ -72,6 +81,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        movieDetails,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

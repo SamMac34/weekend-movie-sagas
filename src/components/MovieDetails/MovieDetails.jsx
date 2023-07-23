@@ -4,20 +4,25 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 function MovieDetails() {
     const location = useLocation();
-    let movie = location.state.movie
+    // let movie = location.state.movie
+    // console.log('in MovieDetails:', movie.id)
 
-    console.log('in MovieDetails:', movie.id )
+    const movie = useSelector(store => store.movies)
+    console.log('in MovieDetails:', movie)
 
     // TODO: GET request for genres
 
+
     return (
-        <>
-        <h1>Movie Details</h1>
-        <h2>{movie.title}</h2>
-        <img src={movie.poster} alt={movie.title}/>
-        
-        
-        </>
+        <div>
+            {/* <h1>Movie Details</h1>
+            <h2>{movie.title}</h2>
+            <p>Genres here</p>
+            <img src={movie.poster} alt={movie.title} />
+            <p>{movie.description}</p> */}
+            <h3>{movie}</h3>
+
+        </div>
     )
 }
 

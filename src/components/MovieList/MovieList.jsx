@@ -16,8 +16,9 @@ function MovieList() {
 
     // Handle click event, send user to MovieDetails page
     const handleMovieClick = (movie) => {
-        console.log('in handleMovieClick, movie is:', movie);
-        history.push({ pathname: `/details/${movie.title}`, state: {movie} })
+        dispatch({ type: 'SELECT_MOVIE', payload: `${movie.id}` });
+        // console.log('in handleMovieClick, movie is:', movie);
+        history.push({ pathname: `/details/${movie.title}`, state: {movie} });
     }
 
 

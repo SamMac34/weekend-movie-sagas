@@ -23,7 +23,9 @@ function MovieDetails() {
                     <span key={movie.id}>⚫️ {movie.name}</span>
                 )
             })}
-            <button type="button" onClick={() => {history.push('/')}}>⬅ Back to List</button>
+            <button
+                type="button"
+                onClick={() => { history.push('/') }}>⬅ Back to List</button>
         </div>
     )
 }

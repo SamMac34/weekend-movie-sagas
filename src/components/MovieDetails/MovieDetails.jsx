@@ -5,18 +5,18 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Show extra details of selected movie
 function MovieDetails() {
     const history = useHistory();
-    const movieArr = useSelector(store => store.movieDetails)
-    
+    const movie = useSelector(store => store.movieDetails)
+
     // Render details
     return (
         <div>
             <h1>Movie Details</h1>
-            <h2>{movieArr[0]?.title}</h2>
-            <img src={movieArr[0]?.poster} alt={movieArr[0]?.title} />
-            <p>{movieArr[0]?.description}</p>
-            {movieArr.map(movie => {
+            <h2>{movie[0]?.title}</h2>
+            <img src={movie[0]?.poster} alt={movie[0]?.title} />
+            <p>{movie[0]?.description}</p>
+            {movie.map(item => {
                 return (
-                    <span key={movie.id}>⚫️ {movie.name}</span>
+                    <span key={item.id}>⚫️ {item.name}</span>
                 )
             })}
             <button

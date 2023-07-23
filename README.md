@@ -10,6 +10,7 @@ This is a movie list app that shows a selection of movies to choose from.  When 
 
 ### Prerequisites
 
+
 ## Installation
 
 1. Create a database named `saga_movies_weekend`.

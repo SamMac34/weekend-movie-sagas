@@ -24,7 +24,7 @@ function MovieList() {
     // Render movie list
     return (
         <main>
-            <h1>MovieList</h1>
+            <h1>Movie List</h1>
             <section className="movies">
                 {movies.map(movie => {
                     return (
@@ -33,7 +33,7 @@ function MovieList() {
                             <img
                                 src={movie.poster}
                                 alt={movie.title}
-                                onClick={() => {handleMovieClick(movie)}}
+                                onClick={() => { handleMovieClick(movie) }}
                             />
                         </div>
                     );

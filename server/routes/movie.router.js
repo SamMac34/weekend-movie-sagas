@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// DB query to fetch all movies
 router.get('/', (req, res) => {
 
   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
@@ -15,7 +16,9 @@ router.get('/', (req, res) => {
     })
 });
 
+// DB query to fetch detailed info and genres for a selected movie
 router.get('/:id', (req, res) => {
+
   console.log(`In router.get by id:, ${req.params.id}`)
   const query = `SELECT "movies"."title", "movies"."description", 
   "movies"."poster", "genres"."name", "genres"."id" FROM "movies"
@@ -32,7 +35,7 @@ router.get('/:id', (req, res) => {
   })
 })
 
-
+// DB query to add new movie
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie

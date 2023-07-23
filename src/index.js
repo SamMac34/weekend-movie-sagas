@@ -12,14 +12,14 @@ import { takeEvery, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-// Create the rootSaga generator function
+// RootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeLatest('FETCH_MOVIEDETAILS', fetchMovieDetails)
-}
+    yield takeLatest('FETCH_MOVIEDETAILS', fetchMovieDetails);
+};
 
+// Fetch all movies from DB
 function* fetchAllMovies() {
-    // get all movies from the DB
     try {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
@@ -28,20 +28,19 @@ function* fetchAllMovies() {
     } catch {
         console.log('get all error');
     }
-}
+};
 
-    // Fetch selected movie details and genres from DBs
+// Fetch selected movie details and genres from DBs
 function* fetchMovieDetails(action) {
 
     try {
         const movie = yield axios.get(`/api/movie/${action.payload}`);
         yield put({ type: 'SET_MOVIEDETAILS', payload: movie.data });
         yield console.log('fetchMovieDetails, movie ID is:', action.payload);
-
     } catch (err) {
-        console.log('Error in fetchMovieDetails:', err)
+        console.log('Error in fetchMovieDetails:', err);
     }
-}
+};
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -54,7 +53,7 @@ const movies = (state = [], action) => {
         default:
             return state;
     }
-}
+};
 
 // Store for movie details
 const movieDetails = (state = [], action) => {
@@ -64,7 +63,7 @@ const movieDetails = (state = [], action) => {
         default:
             return state;
     }
-}
+};
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
@@ -74,7 +73,7 @@ const genres = (state = [], action) => {
         default:
             return state;
     }
-}
+};
 
 // Create one store that all components can use
 const storeInstance = createStore(
